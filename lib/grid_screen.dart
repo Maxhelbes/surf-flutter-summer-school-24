@@ -17,73 +17,68 @@ class GridScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        leading: null,
-        title: const Text('postogramm'),
-        actions:  [IconButton(
-          icon: const Icon(Icons.keyboard_control),
-          onPressed: () => showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return  const SizedBox(
-                height: 125,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 25,
-                            width: 75,
-                            child: Center(child: Icon(Icons.air)),
+          centerTitle: true,
+          leading: null,
+          title: const Text('postogramm'),
+          actions: [
+            IconButton(
+                icon: const Icon(Icons.keyboard_control),
+                onPressed: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return const SizedBox(
+                          height: 125,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(children: [
+                                  SizedBox(
+                                    height: 25,
+                                    width: 75,
+                                    child: Center(child: Icon(Icons.air)),
+                                  ),
+                                  Expanded(child: Text('Theme')),
+                                  SizedBox(
+                                      height: 25,
+                                      width: 75,
+                                      child: Text('light')),
+                                ]),
+                                SizedBox(height: 25),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                        height: 25,
+                                        width: 75,
+                                        child: Icon(Icons.ac_unit)),
+                                    Expanded(child: Text('Upload photo')),
+                                  ],
+                                )
+                              ],
                             ),
-                          Expanded(child: Text('Theme')),
-                          SizedBox(
-                            height: 25,
-                            width: 75,
-                            child: Text('light')),
-                        ]
-                      ),
-                      SizedBox(height: 25),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 25,
-                            width: 75,
-                            child: Icon(Icons.ac_unit)),
-                          Expanded(child: Text('Upload photo')),
-                        ],
-                      )
-                    ],
-                  ),  
-                )
-              ); 
-            }
-          )
-        )
-        ]
-      ),
+                          ));
+                    }))
+          ]),
       body: GridView.builder(
-        gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
-          ),
+        ),
         itemCount: urlList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PhotoScreen(initIndex: index)), 
-              ),
-            child: Image.network(urlList[index], fit: BoxFit.cover,));
-        }, 
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PhotoScreen(initIndex: index)),
+                  ),
+              child: Image.network(
+                urlList[index],
+                fit: BoxFit.cover,
+              ));
+        },
       ),
     );
   }
 }
-
-
-
-

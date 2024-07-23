@@ -12,7 +12,6 @@ class _PhotoScreenState extends State<PhotoScreen> {
   int _numberCurrentImage = 0;
   final _countImages = urlList.length;
 
-
   @override
   void initState() {
     super.initState();
@@ -26,7 +25,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
   }
 
 // (ModalRoute.of(context)?.settings.arguments ?? '') as int;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +37,14 @@ class _PhotoScreenState extends State<PhotoScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          ),
+        ),
         actions: [Text('$_numberCurrentImage/$_countImages')],
       ),
       body: Center(
         child: PageView.builder(
           itemCount: urlList.length,
-          controller: PageController(viewportFraction: 0.9, initialPage: _numberCurrentImage - 1),
+          controller: PageController(
+              viewportFraction: 0.9, initialPage: _numberCurrentImage - 1),
           onPageChanged: (value) => _changeCurrentNumber(value),
           itemBuilder: (BuildContext context, int itemIndex) {
             return Padding(
@@ -83,5 +83,3 @@ const urlList = [
   'https://i1.wp.com/wallpapercave.com/wp/wp5527045.jpg',
   'https://wallpapers.com/images/hd/iphone-7-plus-h05npj7q7ryyp27a.jpg',
 ];
-
-
