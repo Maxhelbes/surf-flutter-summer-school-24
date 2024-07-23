@@ -15,6 +15,13 @@ class MainApp extends StatelessWidget {
   }
 }
 
+const urlList = [
+  'https://wallpapers.com/images/hd/best-ipad-detailed-forest-whrhg2prdhu1224u.jpg',
+  'https://wallpapers.com/images/hd/pine-tree-forest-minimalist-android-r8hj5r0xfc5osrpo.jpg',
+  'https://wallpapers.com/images/hd/watch-tower-in-forest-indie-phone-qc8emhngrxxiligv.jpg',
+  'https://i1.wp.com/wallpapercave.com/wp/wp5527045.jpg',
+  'https://wallpapers.com/images/hd/iphone-7-plus-h05npj7q7ryyp27a.jpg',
+];
 class PhotoPage extends StatefulWidget {
   const PhotoPage({super.key});
 
@@ -23,13 +30,12 @@ class PhotoPage extends StatefulWidget {
 }
 
 class _PhotoPageState extends State<PhotoPage> {
-  int _numberCurrentImage = 0;
-  int _countImages = 0;
+  int _numberCurrentImage = 1;
+  final _countImages = urlList.length;
 
-  void _changeCurrentNumber(int number, int count) {
+  void _changeCurrentNumber(int number) {
     setState(() {
       _numberCurrentImage = number + 1;
-      _countImages = count;
     });
   }
 
@@ -46,7 +52,7 @@ class _PhotoPageState extends State<PhotoPage> {
         child: PageView.builder(
           itemCount: urlList.length,
           controller: PageController(viewportFraction: 0.9),
-          onPageChanged: (value) => _changeCurrentNumber(value, urlList.length),
+          onPageChanged: (value) => _changeCurrentNumber(value),
           itemBuilder: (BuildContext context, int itemIndex) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -59,13 +65,7 @@ class _PhotoPageState extends State<PhotoPage> {
   }
 }
 
-const urlList = [
-  'https://wallpapers.com/images/hd/best-ipad-detailed-forest-whrhg2prdhu1224u.jpg',
-  'https://wallpapers.com/images/hd/pine-tree-forest-minimalist-android-r8hj5r0xfc5osrpo.jpg',
-  'https://wallpapers.com/images/hd/watch-tower-in-forest-indie-phone-qc8emhngrxxiligv.jpg',
-  'https://i1.wp.com/wallpapercave.com/wp/wp5527045.jpg',
-  'https://wallpapers.com/images/hd/iphone-7-plus-h05npj7q7ryyp27a.jpg',
-];
+
 
 class ImageTile extends StatelessWidget {
   final String url;
