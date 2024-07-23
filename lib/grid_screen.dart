@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:surf_flutter_summer_school_24/photo_screen.dart';
 
 const urlList = [
@@ -19,7 +18,10 @@ class GridScreen extends StatelessWidget {
       appBar: AppBar(
           centerTitle: true,
           leading: null,
-          title: const Text('postogramm'),
+          title: SizedBox(
+              height: 32,
+              width: 140,
+              child: Image.asset('assets/icons/logo.png')),
           actions: [
             IconButton(
                 icon: const Icon(Icons.keyboard_control),
@@ -59,25 +61,26 @@ class GridScreen extends StatelessWidget {
                           ));
                     }))
           ]),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5,
-        ),
-        itemCount: urlList.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
+      body: Container(
+        margin: const EdgeInsets.all(10),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 5,
+          ),
+          itemCount: urlList.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
               onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PhotoScreen(initIndex: index)),
-                  ),
-              child: Image.network(
-                urlList[index],
-                fit: BoxFit.cover,
-              ));
-        },
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PhotoScreen(initIndex: index)),
+              ),
+              child: Image.network(urlList[index], fit: BoxFit.cover),
+            );
+          },
+        ),
       ),
     );
   }
