@@ -14,7 +14,8 @@ class PhotoScreen extends StatefulWidget {
 }
 
 class _PhotoScreenState extends State<PhotoScreen> {
-  final _countImages = 4;
+  // TODO значение заменяется на photos.length только после _changeCurrentNumber, сделать что бы было правильное сразу
+  int _countImages = 100500;
   int _numberCurrentImage = 0;
 
   final mockPhotoController =
@@ -39,23 +40,24 @@ class _PhotoScreenState extends State<PhotoScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('22.07.2023'),
-        leading: IconButton(
+        /*leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
-        ),
+        ),*/
         actions: [Text('$_numberCurrentImage/$_countImages')],
       ),
       body: Center(
         child: ValueListenableBuilder<List<PhotoEntity>>(
             valueListenable: mockPhotoController.photoData,
             builder: (context, photos, _) {
+              _countImages = photos.length;
               if (photos.isEmpty) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
               return PageView.builder(
-                itemCount: 4,
+                itemCount: photos.length,
                 controller: PageController(
                     viewportFraction: 0.9,
                     initialPage: _numberCurrentImage - 1),
@@ -65,7 +67,6 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: ImageTile(
                         assetWay: photos[itemIndex].url,
-                        //assetWay: 'assets/mock_photos/1.jpg',
                       ));
                 },
               );
